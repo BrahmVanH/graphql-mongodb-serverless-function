@@ -1,19 +1,28 @@
 import { ApolloError } from 'apollo-server-lambda';
-import EntryModel from './model';
 import { Resolvers } from './generated/graphql';
+import { connectToDb } from './server';
+import getEntryModel, { EntryModel } from './model';
+import { IEntry } from './types';
 
 const resolvers: Resolvers = {
 	Query: {
 		allEntries: async () => {
 			console.log('allEntries');
 			try {
-				const entries = await EntryModel.find().exec();
+				await connectToDb();
 
-				if (!entries) {
-					throw new Error('No entries found in db');
+				// const entries = await EntryModel.find().exec();
+
+				const EntryActions = await getEntryModel();
+
+				if (!EntryActions) {
+					throw new Error('Error getting Entry Actions');
 				}
-				console.log('allEntries entries: ', entries);
-				return entries;
+				const entries: IEntry[] | undefined = await EntryActions.find().exec();
+
+				if (entries) {
+					return entries;
+				}
 			} catch (err) {
 				console.error('>allEntries error', err);
 				throw new Error('There was an error in retrieving entries from db');

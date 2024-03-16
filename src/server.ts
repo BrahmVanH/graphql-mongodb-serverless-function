@@ -63,4 +63,4 @@ const createLocalServer = () =>
 		},
 	});
 
-export { createLambdaServer, createLocalServer };
+export { connectToDb, createLambdaServer, createLocalServer };
