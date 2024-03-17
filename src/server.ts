@@ -1,26 +1,24 @@
 import { ApolloServer as ApolloServerLambda } from 'apollo-server-lambda';
 import { ApolloServer } from 'apollo-server';
 
-import { connect, set } from 'mongoose';
+// import { connect, set } from 'mongoose';
 
-import EntryModel from './model';
+import { EntryModel } from './mongo/model';
 
 import typeDefs from './schema';
 import resolvers from './resolvers';
 
+// const connectToDb = async () => {
+// 	const MONGODB_URI = process.env.MONGODB_URI ?? '';
 
-const connectToDb = async () => {
-	const MONGODB_URI = process.env.MONGODB_URI ?? '';
-
-	try {
-		set('strictQuery', true);
-		await connect(MONGODB_URI).then(() => console.log('Connected to MongoDB'));
-	} catch (error) {
-		console.error('Error connecting to MongoDB', error);
-		throw new Error('Error connecting to MongoDB');
-	}
-};
-
+// 	try {
+// 		set('strictQuery', true);
+// 		await connect(MONGODB_URI).then(() => console.log('Connected to MongoDB'));
+// 	} catch (error) {
+// 		console.error('Error connecting to MongoDB', error);
+// 		throw new Error('Error connecting to MongoDB');
+// 	}
+// };
 
 const createLambdaServer = () => {
 	console.log('Creating Lambda Server');
@@ -29,15 +27,6 @@ const createLambdaServer = () => {
 		resolvers,
 		introspection: true,
 		nodeEnv: 'development',
-		context: async () => {
-			await connectToDb();
-
-			return {
-				models: {
-					EntryModel,
-				},
-			};
-		},
 	});
 	console.log('Lambda Server created: ', server);
 	return server;
@@ -52,15 +41,6 @@ const createLocalServer = () =>
 			origin: '*',
 			credentials: true,
 		},
-		context: async () => {
-			await connectToDb();
-
-			return {
-				models: {
-					EntryModel,
-				},
-			};
-		},
 	});
 
-export { connectToDb, createLambdaServer, createLocalServer };
+export { createLambdaServer, createLocalServer };

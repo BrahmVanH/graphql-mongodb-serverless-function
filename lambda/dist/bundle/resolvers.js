@@ -8,18 +8,17 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
 Object.defineProperty(exports, "__esModule", { value: true });
 const apollo_server_lambda_1 = require("apollo-server-lambda");
-const model_1 = __importDefault(require("./model"));
+const db_1 = require("./mongo/db");
+const model_1 = require("./mongo/model");
 const resolvers = {
     Query: {
         allEntries: () => __awaiter(void 0, void 0, void 0, function* () {
             console.log('allEntries');
             try {
-                const entries = yield model_1.default.find().exec();
+                yield (0, db_1.connectToDb)();
+                const entries = yield model_1.EntryModel.find().exec();
                 if (!entries) {
                     throw new Error('No entries found in db');
                 }
@@ -33,11 +32,12 @@ const resolvers = {
         }),
     },
     Mutation: {
-        createEntry: (_, args, { models }) => __awaiter(void 0, void 0, void 0, function* () {
+        createEntry: (_, args, __) => __awaiter(void 0, void 0, void 0, function* () {
             console.log('createEntry args: ', args);
             const { financial, fitness, dietary, social, professional } = args;
             try {
-                const newEntry = yield model_1.default.create({
+                yield (0, db_1.connectToDb)();
+                const newEntry = yield model_1.EntryModel.create({
                     date: new Date(),
                     financial,
                     fitness,

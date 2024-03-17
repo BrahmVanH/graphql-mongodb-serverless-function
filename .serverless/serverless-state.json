@@ -174,7 +174,7 @@
                 "S3Bucket": {
                   "Ref": "ServerlessDeploymentBucket"
                 },
-                "S3Key": "serverless/graphql-mongodb-api/dev/1710566740305-2024-03-16T05:25:40.305Z/graphql-mongodb-api.zip"
+                "S3Key": "serverless/graphql-mongodb-api/dev/1710637580442-2024-03-17T01:06:20.442Z/graphql-mongodb-api.zip"
               },
               "Handler": "lambda/dist/graphql.handler",
               "Runtime": "nodejs20.x",
@@ -192,14 +192,14 @@
               "GraphqlLogGroup"
             ]
           },
-          "GraphqlLambdaVersionHXLHb6QRf6Xto8dnzQSvTOi5rrsUPwUID6Ryja7olY": {
+          "GraphqlLambdaVersionXyptGQHtCz12qMEXP8qsjMviC5Mo2YDyNBiHluN5O8": {
             "Type": "AWS::Lambda::Version",
             "DeletionPolicy": "Retain",
             "Properties": {
               "FunctionName": {
                 "Ref": "GraphqlLambdaFunction"
               },
-              "CodeSha256": "w/N8DKBhlUD2rBtVgUy8dP8epaF8gzVjffMldudZQY8="
+              "CodeSha256": "nkYtF4UIijVkDLArAG1qn6U1/bEGRtQbwBie4juYqh8="
             }
           },
           "ApiGatewayRestApi": {
@@ -320,7 +320,7 @@
               "GraphqlLambdaPermissionApiGateway"
             ]
           },
-          "ApiGatewayDeployment1710566722625": {
+          "ApiGatewayDeployment1710637563435": {
             "Type": "AWS::ApiGateway::Deployment",
             "Properties": {
               "RestApiId": {
@@ -383,7 +383,7 @@
           "GraphqlLambdaFunctionQualifiedArn": {
             "Description": "Current Lambda function version",
             "Value": {
-              "Ref": "GraphqlLambdaVersionHXLHb6QRf6Xto8dnzQSvTOi5rrsUPwUID6Ryja7olY"
+              "Ref": "GraphqlLambdaVersionXyptGQHtCz12qMEXP8qsjMviC5Mo2YDyNBiHluN5O8"
             },
             "Export": {
               "Name": "sls-graphql-mongodb-api-dev-GraphqlLambdaFunctionQualifiedArn"
@@ -547,7 +547,7 @@
         "memory": 1024,
         "runtime": "nodejs20.x",
         "vpc": {},
-        "versionLogicalId": "GraphqlLambdaVersionHXLHb6QRf6Xto8dnzQSvTOi5rrsUPwUID6Ryja7olY"
+        "versionLogicalId": "GraphqlLambdaVersionXyptGQHtCz12qMEXP8qsjMviC5Mo2YDyNBiHluN5O8"
       }
     },
     "configValidationMode": "warn",
@@ -569,7 +569,7 @@
     "artifact": "C:\\Users\\Brahm\\Dev-Stuff\\Apps\\securities-chart\\graphql-mongodb-serverless-function\\.serverless\\graphql-mongodb-api.zip"
   },
   "package": {
-    "artifactDirectoryName": "serverless/graphql-mongodb-api/dev/1710566740305-2024-03-16T05:25:40.305Z",
+    "artifactDirectoryName": "serverless/graphql-mongodb-api/dev/1710637580442-2024-03-17T01:06:20.442Z",
     "artifact": "graphql-mongodb-api.zip"
   }
 }

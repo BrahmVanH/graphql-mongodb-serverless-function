@@ -1,7 +1,7 @@
 import { ApolloError } from 'apollo-server-lambda';
 import { Resolvers } from './generated/graphql';
-import { connectToDb } from './server';
-import getEntryModel, { EntryModel } from './model';
+import { connectToDb } from './mongo/db';
+import { EntryModel } from './mongo/model';
 import { IEntry } from './types';
 
 const resolvers: Resolvers = {
@@ -11,18 +11,13 @@ const resolvers: Resolvers = {
 			try {
 				await connectToDb();
 
-				// const entries = await EntryModel.find().exec();
+				const entries = await EntryModel.find().exec();
 
-				const EntryActions = await getEntryModel();
-
-				if (!EntryActions) {
-					throw new Error('Error getting Entry Actions');
+				if (!entries) {
+					throw new Error('No entries found in db');
 				}
-				const entries: IEntry[] | undefined = await EntryActions.find().exec();
-
-				if (entries) {
-					return entries;
-				}
+				console.log('allEntries entries: ', entries);
+				return entries;
 			} catch (err) {
 				console.error('>allEntries error', err);
 				throw new Error('There was an error in retrieving entries from db');
@@ -30,10 +25,11 @@ const resolvers: Resolvers = {
 		},
 	},
 	Mutation: {
-		createEntry: async (_: {}, args, { models }: any) => {
+		createEntry: async (_: {}, args, __: any) => {
 			console.log('createEntry args: ', args);
 			const { financial, fitness, dietary, social, professional } = args;
 			try {
+				await connectToDb();
 				const newEntry = await EntryModel.create({
 					date: new Date(),
 					financial,
