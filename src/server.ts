@@ -7,6 +7,9 @@ const server = new ApolloServer({
 	typeDefs,
 	resolvers,
 	introspection: true,
+	csrfPrevention: true,
 });
 
 export const handler = startServerAndCreateLambdaHandler(server, handlers.createAPIGatewayProxyEventV2RequestHandler());
+
+

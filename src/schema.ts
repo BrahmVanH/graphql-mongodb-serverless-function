@@ -1,13 +1,19 @@
 const typeDefs = `#graphql
 	scalar Date
 
-	type Entry {
-		date: Date
+	type SecuritiesRating {
 		financial: Int
 		fitness: Int
 		dietary: Int
 		social: Int
 		professional: Int
+	}
+
+	type Entry {
+		id: ID
+		date: Date
+		text: String
+		securitiesRating: SecuritiesRating
 	}
 	type Query {
 		allEntries: [Entry]

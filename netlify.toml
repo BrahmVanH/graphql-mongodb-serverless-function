@@ -1,7 +1,0 @@
-  publish = "client/dist"
-
-[build]
-  command = "npm run build:lambda"
-  functions = "lambda/dist"
-
-

@@ -25,17 +25,17 @@ const resolvers = {
 	Mutation: {
 		createEntry: async (_: {}, args: Entry, __: any) => {
 			console.log('createEntry args: ', args);
-			const { financial, fitness, dietary, social, professional } = args;
+			// const { financial, fitness, dietary, social, professional } = args;
+			if (!args.securitiesRating || !args.text) {
+				console.log('args.securitiesRating: ', args.securitiesRating);
+				throw new Error('No securitiesRating or text provided');
+			}
+
+			const text = args.text;
+
 			try {
 				await connectToDb();
-				const newEntry = await EntryModel.create({
-					date: new Date(),
-					financial,
-					fitness,
-					dietary,
-					social,
-					professional,
-				});
+				const newEntry = await EntryModel.create({ securitiesRating: args.securitiesRating, text, date: new Date() });
 
 				if (newEntry) {
 					console.log('newEntry: ', newEntry);
