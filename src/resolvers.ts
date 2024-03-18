@@ -1,6 +1,7 @@
 import { connectToDb } from './mongo/db';
-import { Entry, Resolvers } from './generated/graphql';
+import { Entry, EntryInput, Resolvers } from './generated/graphql';
 import { EntryModel } from './mongo/model';
+import { ICreateEntryArgs } from './types';
 
 const resolvers = {
 	Query: {
@@ -23,19 +24,21 @@ const resolvers = {
 		},
 	},
 	Mutation: {
-		createEntry: async (_: {}, args: Entry, __: any) => {
-			console.log('createEntry args: ', args);
+		createEntry: async (_: {}, args: ICreateEntryArgs, __: any) => {
+			const entry = args.entry as EntryInput;
+
 			// const { financial, fitness, dietary, social, professional } = args;
-			if (!args.securitiesRating || !args.text) {
-				console.log('args.securitiesRating: ', args.securitiesRating);
+			if (!entry.securitiesRating || !entry.text) {
+				console.error('No securitiesRating or text provided');
 				throw new Error('No securitiesRating or text provided');
 			}
 
-			const text = args.text;
+			const text = entry.text;
+			const securitiesRating = entry.securitiesRating;
 
 			try {
 				await connectToDb();
-				const newEntry = await EntryModel.create({ securitiesRating: args.securitiesRating, text, date: new Date() });
+				const newEntry = await EntryModel.create({ securitiesRating, text, date: new Date() });
 
 				if (newEntry) {
 					console.log('newEntry: ', newEntry);

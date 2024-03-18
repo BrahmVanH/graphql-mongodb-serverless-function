@@ -12,6 +12,7 @@ const server = new server_1.ApolloServer({
     typeDefs: schema_1.default,
     resolvers: resolvers_1.default,
     introspection: true,
+    csrfPrevention: true,
 });
 exports.handler = (0, aws_lambda_1.startServerAndCreateLambdaHandler)(server, aws_lambda_1.handlers.createAPIGatewayProxyEventV2RequestHandler());
 //# sourceMappingURL=server.js.map

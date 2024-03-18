@@ -24,6 +24,11 @@ export type Entry = {
   text?: Maybe<Scalars['String']['output']>;
 };
 
+export type EntryInput = {
+  securitiesRating?: InputMaybe<SecuritiesRatingInput>;
+  text?: InputMaybe<Scalars['String']['input']>;
+};
+
 export type Mutation = {
   __typename?: 'Mutation';
   createEntry?: Maybe<Entry>;
@@ -31,11 +36,7 @@ export type Mutation = {
 
 
 export type MutationCreateEntryArgs = {
-  dietary?: InputMaybe<Scalars['Int']['input']>;
-  financial?: InputMaybe<Scalars['Int']['input']>;
-  fitness?: InputMaybe<Scalars['Int']['input']>;
-  professional?: InputMaybe<Scalars['Int']['input']>;
-  social?: InputMaybe<Scalars['Int']['input']>;
+  entry?: InputMaybe<EntryInput>;
 };
 
 export type Query = {
@@ -48,8 +49,18 @@ export type SecuritiesRating = {
   dietary?: Maybe<Scalars['Int']['output']>;
   financial?: Maybe<Scalars['Int']['output']>;
   fitness?: Maybe<Scalars['Int']['output']>;
+  mental?: Maybe<Scalars['Int']['output']>;
   professional?: Maybe<Scalars['Int']['output']>;
   social?: Maybe<Scalars['Int']['output']>;
+};
+
+export type SecuritiesRatingInput = {
+  dietary?: InputMaybe<Scalars['Int']['input']>;
+  financial?: InputMaybe<Scalars['Int']['input']>;
+  fitness?: InputMaybe<Scalars['Int']['input']>;
+  mental?: InputMaybe<Scalars['Int']['input']>;
+  professional?: InputMaybe<Scalars['Int']['input']>;
+  social?: InputMaybe<Scalars['Int']['input']>;
 };
 
 
@@ -126,11 +137,13 @@ export type ResolversTypes = {
   Boolean: ResolverTypeWrapper<Scalars['Boolean']['output']>;
   Date: ResolverTypeWrapper<Scalars['Date']['output']>;
   Entry: ResolverTypeWrapper<Entry>;
+  EntryInput: EntryInput;
   ID: ResolverTypeWrapper<Scalars['ID']['output']>;
   Int: ResolverTypeWrapper<Scalars['Int']['output']>;
   Mutation: ResolverTypeWrapper<{}>;
   Query: ResolverTypeWrapper<{}>;
   SecuritiesRating: ResolverTypeWrapper<SecuritiesRating>;
+  SecuritiesRatingInput: SecuritiesRatingInput;
   String: ResolverTypeWrapper<Scalars['String']['output']>;
 };
 
@@ -139,11 +152,13 @@ export type ResolversParentTypes = {
   Boolean: Scalars['Boolean']['output'];
   Date: Scalars['Date']['output'];
   Entry: Entry;
+  EntryInput: EntryInput;
   ID: Scalars['ID']['output'];
   Int: Scalars['Int']['output'];
   Mutation: {};
   Query: {};
   SecuritiesRating: SecuritiesRating;
+  SecuritiesRatingInput: SecuritiesRatingInput;
   String: Scalars['String']['output'];
 };
 
@@ -171,6 +186,7 @@ export type SecuritiesRatingResolvers<ContextType = any, ParentType extends Reso
   dietary?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
   financial?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
   fitness?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
+  mental?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
   professional?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
   social?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;

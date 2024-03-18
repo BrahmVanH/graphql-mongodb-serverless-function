@@ -5,6 +5,7 @@ const typeDefs = `#graphql
 		financial: Int
 		fitness: Int
 		dietary: Int
+		mental: Int
 		social: Int
 		professional: Int
 	}
@@ -15,12 +16,26 @@ const typeDefs = `#graphql
 		text: String
 		securitiesRating: SecuritiesRating
 	}
+
+	input SecuritiesRatingInput {
+		financial: Int
+		fitness: Int
+		dietary: Int
+		mental: Int
+		social: Int
+		professional: Int
+	}
+
+	input EntryInput {
+		text: String
+		securitiesRating: SecuritiesRatingInput
+	}
 	type Query {
 		allEntries: [Entry]
 	}
 
 	type Mutation {
-		createEntry(financial: Int, fitness: Int, dietary: Int, social: Int, professional: Int): Entry
+		createEntry(entry: EntryInput): Entry
 	}
 `;
 

@@ -1,13 +1,9 @@
 import { PluginDefinition } from 'apollo-server-core';
 import { ConnectOptions } from 'mongoose';
+import { EntryInput } from './generated/graphql';
 
-interface IConnectOptions extends ConnectOptions {
-	useUnifiedTopology?: boolean;
-	useCreateIndex?: boolean;
-	useFindAndModify?: boolean;
-}
 
-interface ISecuritiesRating {
+interface  ISecuritiesRating {
 	financial: number;
 	fitness: number;
 	mental: number;
@@ -17,13 +13,13 @@ interface ISecuritiesRating {
 }
 
 export interface IEntry {
+	id?: string;
+	date?: Date;
 	text?: string;
 	securitiesRating?: ISecuritiesRating;
 }
 
 
-export type TPluginDefinition = PluginDefinition & {
-	playground: () => void;
-};
-
-
+export interface ICreateEntryArgs {
+	entry: EntryInput;
+}

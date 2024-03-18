@@ -34,6 +34,10 @@ const entrySchema: Schema = new Schema<IEntry>({
 	text: {
 		type: String,
 	},
+	date: {
+		type: Date,
+		default: Date.now,
+	},
 	securitiesRating: {
 		type: securitiesRatingSchema,
 		required: true,
