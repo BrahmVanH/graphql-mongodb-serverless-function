@@ -37,6 +37,10 @@ const resolvers = {
 					professional,
 				});
 
+				if (newEntry) {
+					console.log('newEntry: ', newEntry);
+				}
+
 				return newEntry;
 			} catch (err) {
 				console.error('> createEntry error: ', err);

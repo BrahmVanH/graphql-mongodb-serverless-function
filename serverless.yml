@@ -6,9 +6,21 @@ provider:
   httpApi:
     cors: true
 
+custom:
+  hooks:
+    before:deploy:runBuild:
+      commands: npm run build:lambda
+
+package:
+  exclude:
+    - src/**/*.ts
+
+
+
+
 functions:
   graphql:
-    handler: src/server.graphqlHandler
+    handler: lambda/dist/server.graphqlHandler
     events:
       - httpApi:
           path: /
@@ -17,5 +29,4 @@ functions:
           path: /
           method: GET
 
-plugins:
-  - serverless-plugin-typescript
+
