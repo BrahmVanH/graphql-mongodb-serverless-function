@@ -2,11 +2,6 @@
 
 [build]
   command = "npm run build:lambda"
-
-  [functions]
-  directory = "lambda/dist"
-  included_files = ["server.js"]
-
-
+  functions = "lambda/dist"
 
 
