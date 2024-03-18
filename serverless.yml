@@ -20,7 +20,7 @@ package:
 
 functions:
   graphql:
-    handler: lambda/dist/server.graphqlHandler
+    handler: lambda/dist/server.handler
     events:
       - httpApi:
           path: /
