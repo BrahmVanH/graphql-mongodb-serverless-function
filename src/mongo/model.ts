@@ -1,7 +1,8 @@
 import { model, Schema } from 'mongoose';
-import { IEntry } from '../types';
+// import { IEntry } from '../types';
+import { Entry } from '../generated/graphql';
 
-const entrySchema: Schema = new Schema<IEntry>({
+const entrySchema: Schema = new Schema<Entry>({
 	date: {
 		type: Date,
 	},
@@ -20,4 +21,4 @@ const entrySchema: Schema = new Schema<IEntry>({
 	professional: { type: Number },
 });
 
-export const EntryModel = model<IEntry>('Entry', entrySchema);
+export const EntryModel = model<Entry>('Entry', entrySchema);

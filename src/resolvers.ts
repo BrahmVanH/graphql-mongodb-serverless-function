@@ -1,10 +1,8 @@
-import { ApolloError } from 'apollo-server-lambda';
-import { Resolvers } from './generated/graphql';
 import { connectToDb } from './mongo/db';
+import { Entry, Resolvers } from './generated/graphql';
 import { EntryModel } from './mongo/model';
-import { IEntry } from './types';
 
-const resolvers: Resolvers = {
+const resolvers = {
 	Query: {
 		allEntries: async () => {
 			console.log('allEntries');
@@ -25,7 +23,7 @@ const resolvers: Resolvers = {
 		},
 	},
 	Mutation: {
-		createEntry: async (_: {}, args, __: any) => {
+		createEntry: async (_: {}, args: Entry, __: any) => {
 			console.log('createEntry args: ', args);
 			const { financial, fitness, dietary, social, professional } = args;
 			try {
@@ -43,7 +41,7 @@ const resolvers: Resolvers = {
 			} catch (err) {
 				console.error('> createEntry error: ', err);
 
-				throw new ApolloError('Error in creating new entry');
+				throw new Error('Error in creating new entry');
 			}
 		},
 	},

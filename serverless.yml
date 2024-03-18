@@ -2,22 +2,20 @@ service: graphql-mongodb-api
 
 provider:
   name: aws
-  runtime: nodejs20.x
-  region: us-east-2
-
-custom:
-  hooks:
-    before:package:compileFunctions:
-      commands: npm install
-    before:deploy:runBuild:
-      commands: npm run build
+  runtime: nodejs16.x
+  httpApi:
+    cors: true
 
 functions:
   graphql:
-    handler: lambda/dist/graphql.handler
-    timeout: 120
+    handler: src/server.graphqlHandler
     events:
-      - http:
-          path: graphql
-          method: post
-          cors: true
+      - httpApi:
+          path: /
+          method: POST
+      - httpApi:
+          path: /
+          method: GET
+
+plugins:
+  - serverless-plugin-typescript

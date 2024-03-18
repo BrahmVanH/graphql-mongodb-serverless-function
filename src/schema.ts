@@ -1,6 +1,4 @@
-import { gql } from 'apollo-server-lambda';
-
-const typeDefs = gql`
+const typeDefs = `#graphql
 	scalar Date
 
 	type Entry {
