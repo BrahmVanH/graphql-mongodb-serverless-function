@@ -162,7 +162,7 @@
           "S3Bucket": {
             "Ref": "ServerlessDeploymentBucket"
           },
-          "S3Key": "serverless/graphql-mongodb-api/dev/1710821297895-2024-03-19T04:08:17.895Z/graphql-mongodb-api.zip"
+          "S3Key": "serverless/graphql-mongodb-api/dev/1710821992685-2024-03-19T04:19:52.685Z/graphql-mongodb-api.zip"
         },
         "Handler": "lambda/dist/server.handler",
         "Runtime": "nodejs16.x",
@@ -311,27 +311,6 @@
           "Ref": "HttpApi"
         },
         "RouteKey": "GET /",
-        "Target": {
-          "Fn::Join": [
-            "/",
-            [
-              "integrations",
-              {
-                "Ref": "HttpApiIntegrationGraphql"
-              }
-            ]
-          ]
-        }
-      },
-      "DependsOn": "HttpApiIntegrationGraphql"
-    },
-    "HttpApiRouteOptions": {
-      "Type": "AWS::ApiGatewayV2::Route",
-      "Properties": {
-        "ApiId": {
-          "Ref": "HttpApi"
-        },
-        "RouteKey": "OPTIONS /",
         "Target": {
           "Fn::Join": [
             "/",
