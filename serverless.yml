@@ -15,9 +15,6 @@ package:
   exclude:
     - src/**/*.ts
 
-
-
-
 functions:
   graphql:
     handler: lambda/dist/server.handler
@@ -28,5 +25,6 @@ functions:
       - httpApi:
           path: /
           method: GET
-
-
+      - httpApi:
+          path: /
+          method: OPTIONS

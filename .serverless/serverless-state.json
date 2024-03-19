@@ -177,7 +177,7 @@
                 "S3Bucket": {
                   "Ref": "ServerlessDeploymentBucket"
                 },
-                "S3Key": "serverless/graphql-mongodb-api/dev/1710739305645-2024-03-18T05:21:45.645Z/graphql-mongodb-api.zip"
+                "S3Key": "serverless/graphql-mongodb-api/dev/1710821297895-2024-03-19T04:08:17.895Z/graphql-mongodb-api.zip"
               },
               "Handler": "lambda/dist/server.handler",
               "Runtime": "nodejs16.x",
@@ -195,14 +195,14 @@
               "GraphqlLogGroup"
             ]
           },
-          "GraphqlLambdaVersion1ehNwBmMdggecZIY2jvbRZwhPaRmqD7ETyaoQpy0s": {
+          "GraphqlLambdaVersionUzQkS9W38XnbBhM5rDBfs9NpZEJxs6RnIX9TBpcLA": {
             "Type": "AWS::Lambda::Version",
             "DeletionPolicy": "Retain",
             "Properties": {
               "FunctionName": {
                 "Ref": "GraphqlLambdaFunction"
               },
-              "CodeSha256": "fEgg0rbk92aiuxWQbUPjwzWPasmAdhkmIwxXTTP+fnY="
+              "CodeSha256": "PUzeI134zIYw13cjYAKIyEveGmZS0zUihK3wU49+Ggo="
             }
           },
           "HttpApi": {
@@ -336,6 +336,27 @@
               }
             },
             "DependsOn": "HttpApiIntegrationGraphql"
+          },
+          "HttpApiRouteOptions": {
+            "Type": "AWS::ApiGatewayV2::Route",
+            "Properties": {
+              "ApiId": {
+                "Ref": "HttpApi"
+              },
+              "RouteKey": "OPTIONS /",
+              "Target": {
+                "Fn::Join": [
+                  "/",
+                  [
+                    "integrations",
+                    {
+                      "Ref": "HttpApiIntegrationGraphql"
+                    }
+                  ]
+                ]
+              }
+            },
+            "DependsOn": "HttpApiIntegrationGraphql"
           }
         },
         "Outputs": {
@@ -350,7 +371,7 @@
           "GraphqlLambdaFunctionQualifiedArn": {
             "Description": "Current Lambda function version",
             "Value": {
-              "Ref": "GraphqlLambdaVersion1ehNwBmMdggecZIY2jvbRZwhPaRmqD7ETyaoQpy0s"
+              "Ref": "GraphqlLambdaVersionUzQkS9W38XnbBhM5rDBfs9NpZEJxs6RnIX9TBpcLA"
             },
             "Export": {
               "Name": "sls-graphql-mongodb-api-dev-GraphqlLambdaFunctionQualifiedArn"
@@ -503,6 +524,14 @@
             },
             "resolvedMethod": "GET",
             "resolvedPath": "/"
+          },
+          {
+            "httpApi": {
+              "path": "/",
+              "method": "OPTIONS"
+            },
+            "resolvedMethod": "OPTIONS",
+            "resolvedPath": "/"
           }
         ],
         "name": "graphql-mongodb-api-dev-graphql",
@@ -511,7 +540,7 @@
         "timeout": 6,
         "runtime": "nodejs16.x",
         "vpc": {},
-        "versionLogicalId": "GraphqlLambdaVersion1ehNwBmMdggecZIY2jvbRZwhPaRmqD7ETyaoQpy0s"
+        "versionLogicalId": "GraphqlLambdaVersionUzQkS9W38XnbBhM5rDBfs9NpZEJxs6RnIX9TBpcLA"
       }
     },
     "configValidationMode": "warn",
@@ -530,7 +559,7 @@
         ],
         "artifactsS3KeyDirname": "serverless/graphql-mongodb-api/dev/code-artifacts",
         "artifact": "C:\\Users\\Brahm\\Dev-Stuff\\Apps\\securities-chart\\graphql-mongodb-serverless-function\\.serverless\\graphql-mongodb-api.zip",
-        "artifactDirectoryName": "serverless/graphql-mongodb-api/dev/1710739305645-2024-03-18T05:21:45.645Z"
+        "artifactDirectoryName": "serverless/graphql-mongodb-api/dev/1710821297895-2024-03-19T04:08:17.895Z"
       },
       "functions": {
         "$ref": "$[\"service\"][\"functions\"]"
@@ -541,7 +570,7 @@
     "artifact": "C:\\Users\\Brahm\\Dev-Stuff\\Apps\\securities-chart\\graphql-mongodb-serverless-function\\.serverless\\graphql-mongodb-api.zip"
   },
   "package": {
-    "artifactDirectoryName": "serverless/graphql-mongodb-api/dev/1710739305645-2024-03-18T05:21:45.645Z",
+    "artifactDirectoryName": "serverless/graphql-mongodb-api/dev/1710821297895-2024-03-19T04:08:17.895Z",
     "artifact": "graphql-mongodb-api.zip"
   }
 }
