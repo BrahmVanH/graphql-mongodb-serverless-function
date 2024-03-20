@@ -12,21 +12,13 @@ const server = new ApolloServer({
 	introspection: true,
 });
 
-// const allowedOrigins = process.env.ALLOWED_ORIGINS?.split(',') || [];
-const allowedOrigins = ['http://localhost:5173'];
-// 'https://main--weekly-journal.netlify.app/', 'https://weekly-journal.netlify.app',
+const allowedOrigins = process.env.ALLOWED_ORIGINS?.split(',') || [];
 const requestHandler = handlers.createAPIGatewayProxyEventV2RequestHandler();
 
 const corsMiddleware: middleware.MiddlewareFn<typeof requestHandler> = async (event) => {
-	console.log('cors middleware activating');
 	const origin = event.headers.origin;
-	console.log('event', event);
-	console.log('origin', origin);
 	if (origin && allowedOrigins.includes(origin)) {
-		console.log('origin allowed: ', origin);
 		return (result) => {
-			console.log('result', result);
-			console.log('setting headers');
 			result.headers = {
 				...result.headers,
 				'Access-Control-Allow-Origin': origin,
@@ -35,10 +27,8 @@ const corsMiddleware: middleware.MiddlewareFn<typeof requestHandler> = async (ev
 			return Promise.resolve();
 		};
 	} else {
-		// Reject requests from disallowed origins
-		console.log('origin not allowed: ', origin);
 		return (result) => {
-			result.statusCode = 403; // Forbidden status code
+			result.statusCode = 403; 
 			result.body = 'Origin not allowed';
 			return Promise.resolve();
 		};

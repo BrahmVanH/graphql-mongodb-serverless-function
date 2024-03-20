@@ -6,7 +6,6 @@ import { ICreateEntryArgs } from './types';
 const resolvers = {
 	Query: {
 		allEntries: async () => {
-			console.log('allEntries');
 			try {
 				await connectToDb();
 
@@ -15,7 +14,6 @@ const resolvers = {
 				if (!entries) {
 					throw new Error('No entries found in db');
 				}
-				console.log('allEntries entries: ', entries);
 				return entries;
 			} catch (err) {
 				console.error('>allEntries error', err);
@@ -29,7 +27,6 @@ const resolvers = {
 				await connectToDb();
 				const entry = args.entry as EntryInput;
 
-				// const { financial, fitness, dietary, social, professional } = args;
 				if (!entry.securitiesRating || !entry.text) {
 					console.error('No securitiesRating or text provided');
 					throw new Error('No securitiesRating or text provided');

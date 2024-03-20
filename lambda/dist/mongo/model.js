@@ -2,7 +2,6 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.EntryModel = void 0;
 const mongoose_1 = require("mongoose");
-// import { Entry } from '../generated/graphql';
 const securitiesRatingSchema = new mongoose_1.Schema({
     financial: {
         type: Number,

@@ -14,14 +14,12 @@ const model_1 = require("./mongo/model");
 const resolvers = {
     Query: {
         allEntries: () => __awaiter(void 0, void 0, void 0, function* () {
-            console.log('allEntries');
             try {
                 yield (0, db_1.connectToDb)();
                 const entries = yield model_1.EntryModel.find().exec();
                 if (!entries) {
                     throw new Error('No entries found in db');
                 }
-                console.log('allEntries entries: ', entries);
                 return entries;
             }
             catch (err) {
@@ -35,7 +33,6 @@ const resolvers = {
             try {
                 yield (0, db_1.connectToDb)();
                 const entry = args.entry;
-                // const { financial, fitness, dietary, social, professional } = args;
                 if (!entry.securitiesRating || !entry.text) {
                     console.error('No securitiesRating or text provided');
                     throw new Error('No securitiesRating or text provided');

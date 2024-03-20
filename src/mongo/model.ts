@@ -1,6 +1,5 @@
 import { model, Schema } from 'mongoose';
 import { IEntry, ISecuritiesRating } from '../types';
-// import { Entry } from '../generated/graphql';
 
 
 const securitiesRatingSchema: Schema = new Schema<ISecuritiesRating>({
