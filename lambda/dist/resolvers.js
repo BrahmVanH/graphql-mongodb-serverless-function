@@ -43,8 +43,8 @@ const resolvers = {
                 const text = entry.text;
                 const securitiesRating = entry.securitiesRating;
                 const newEntry = yield model_1.EntryModel.create({ securitiesRating, text, date: new Date() });
-                if (newEntry) {
-                    console.log('newEntry: ', newEntry);
+                if (!newEntry) {
+                    throw new Error('Error in creating new entry');
                 }
                 return newEntry;
             }

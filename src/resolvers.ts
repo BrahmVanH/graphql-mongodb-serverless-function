@@ -40,10 +40,9 @@ const resolvers = {
 
 				const newEntry = await EntryModel.create({ securitiesRating, text, date: new Date() });
 
-				if (newEntry) {
-					console.log('newEntry: ', newEntry);
+				if (!newEntry) {
+					throw new Error('Error in creating new entry');
 				}
-
 				return newEntry;
 			} catch (err) {
 				console.error('> createEntry error: ', err);

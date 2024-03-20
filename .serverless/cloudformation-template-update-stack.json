@@ -162,7 +162,7 @@
           "S3Bucket": {
             "Ref": "ServerlessDeploymentBucket"
           },
-          "S3Key": "serverless/graphql-mongodb-api/dev/1710895275338-2024-03-20T00:41:15.338Z/graphql-mongodb-api.zip"
+          "S3Key": "serverless/graphql-mongodb-api/dev/1710956081769-2024-03-20T17:34:41.769Z/graphql-mongodb-api.zip"
         },
         "Handler": "lambda/dist/server.handler",
         "Runtime": "nodejs16.x",
@@ -180,14 +180,14 @@
         "GraphqlLogGroup"
       ]
     },
-    "GraphqlLambdaVersionO2qbGrL3F4oZgLF80Ofj6myFnSYBGdkLwO4tP8POu8": {
+    "GraphqlLambdaVersionHtPlSNPl7XEY92oCLDapsJu2uoCCYEQVVYf0VnHEQ8": {
       "Type": "AWS::Lambda::Version",
       "DeletionPolicy": "Retain",
       "Properties": {
         "FunctionName": {
           "Ref": "GraphqlLambdaFunction"
         },
-        "CodeSha256": "uKixpDdg8oXQaRUUtOlIHEJFzJVm1Y8XVZam3STzYB4="
+        "CodeSha256": "4ZKnDoFWWMMFZBtZkSK/djNJO/YWRm/9eHoW3CBIZ2I="
       }
     },
     "HttpApi": {
@@ -338,7 +338,7 @@
     "GraphqlLambdaFunctionQualifiedArn": {
       "Description": "Current Lambda function version",
       "Value": {
-        "Ref": "GraphqlLambdaVersionO2qbGrL3F4oZgLF80Ofj6myFnSYBGdkLwO4tP8POu8"
+        "Ref": "GraphqlLambdaVersionHtPlSNPl7XEY92oCLDapsJu2uoCCYEQVVYf0VnHEQ8"
       },
       "Export": {
         "Name": "sls-graphql-mongodb-api-dev-GraphqlLambdaFunctionQualifiedArn"

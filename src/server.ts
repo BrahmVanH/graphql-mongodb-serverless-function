@@ -34,8 +34,15 @@ const corsMiddleware: middleware.MiddlewareFn<typeof requestHandler> = async (ev
 			};
 			return Promise.resolve();
 		};
+	} else {
+		// Reject requests from disallowed origins
+		console.log('origin not allowed: ', origin);
+		return (result) => {
+			result.statusCode = 403; // Forbidden status code
+			result.body = 'Origin not allowed';
+			return Promise.resolve();
+		};
 	}
-	return () => Promise.resolve();
 };
 
 export const handler = startServerAndCreateLambdaHandler(server, handlers.createAPIGatewayProxyEventV2RequestHandler(), {

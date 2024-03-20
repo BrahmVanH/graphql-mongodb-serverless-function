@@ -25,7 +25,8 @@ const server = new server_1.ApolloServer({
     introspection: true,
 });
 // const allowedOrigins = process.env.ALLOWED_ORIGINS?.split(',') || [];
-const allowedOrigins = ['https://main--weekly-journal.netlify.app/', 'https://weekly-journal.netlify.app', 'http://localhost:5173'];
+const allowedOrigins = ['http://localhost:5173'];
+// 'https://main--weekly-journal.netlify.app/', 'https://weekly-journal.netlify.app',
 const requestHandler = aws_lambda_1.handlers.createAPIGatewayProxyEventV2RequestHandler();
 const corsMiddleware = (event) => __awaiter(void 0, void 0, void 0, function* () {
     console.log('cors middleware activating');
@@ -41,7 +42,15 @@ const corsMiddleware = (event) => __awaiter(void 0, void 0, void 0, function* ()
             return Promise.resolve();
         };
     }
-    return () => Promise.resolve();
+    else {
+        // Reject requests from disallowed origins
+        console.log('origin not allowed: ', origin);
+        return (result) => {
+            result.statusCode = 403; // Forbidden status code
+            result.body = 'Origin not allowed';
+            return Promise.resolve();
+        };
+    }
 });
 exports.handler = (0, aws_lambda_1.startServerAndCreateLambdaHandler)(server, aws_lambda_1.handlers.createAPIGatewayProxyEventV2RequestHandler(), {
     middleware: [corsMiddleware],
