@@ -15,6 +15,9 @@ package:
   exclude:
     - src/**/*.ts
 
+plugins:
+  - serverless-offline
+
 functions:
   graphql:
     handler: lambda/dist/server.handler

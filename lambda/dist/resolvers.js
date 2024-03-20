@@ -32,16 +32,16 @@ const resolvers = {
     },
     Mutation: {
         createEntry: (_, args, __) => __awaiter(void 0, void 0, void 0, function* () {
-            const entry = args.entry;
-            // const { financial, fitness, dietary, social, professional } = args;
-            if (!entry.securitiesRating || !entry.text) {
-                console.error('No securitiesRating or text provided');
-                throw new Error('No securitiesRating or text provided');
-            }
-            const text = entry.text;
-            const securitiesRating = entry.securitiesRating;
             try {
                 yield (0, db_1.connectToDb)();
+                const entry = args.entry;
+                // const { financial, fitness, dietary, social, professional } = args;
+                if (!entry.securitiesRating || !entry.text) {
+                    console.error('No securitiesRating or text provided');
+                    throw new Error('No securitiesRating or text provided');
+                }
+                const text = entry.text;
+                const securitiesRating = entry.securitiesRating;
                 const newEntry = yield model_1.EntryModel.create({ securitiesRating, text, date: new Date() });
                 if (newEntry) {
                     console.log('newEntry: ', newEntry);

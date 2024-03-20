@@ -177,7 +177,7 @@
                 "S3Bucket": {
                   "Ref": "ServerlessDeploymentBucket"
                 },
-                "S3Key": "serverless/graphql-mongodb-api/dev/1710821992685-2024-03-19T04:19:52.685Z/graphql-mongodb-api.zip"
+                "S3Key": "serverless/graphql-mongodb-api/dev/1710895275338-2024-03-20T00:41:15.338Z/graphql-mongodb-api.zip"
               },
               "Handler": "lambda/dist/server.handler",
               "Runtime": "nodejs16.x",
@@ -195,14 +195,14 @@
               "GraphqlLogGroup"
             ]
           },
-          "GraphqlLambdaVersionUzQkS9W38XnbBhM5rDBfs9NpZEJxs6RnIX9TBpcLA": {
+          "GraphqlLambdaVersionO2qbGrL3F4oZgLF80Ofj6myFnSYBGdkLwO4tP8POu8": {
             "Type": "AWS::Lambda::Version",
             "DeletionPolicy": "Retain",
             "Properties": {
               "FunctionName": {
                 "Ref": "GraphqlLambdaFunction"
               },
-              "CodeSha256": "PUzeI134zIYw13cjYAKIyEveGmZS0zUihK3wU49+Ggo="
+              "CodeSha256": "uKixpDdg8oXQaRUUtOlIHEJFzJVm1Y8XVZam3STzYB4="
             }
           },
           "HttpApi": {
@@ -350,7 +350,7 @@
           "GraphqlLambdaFunctionQualifiedArn": {
             "Description": "Current Lambda function version",
             "Value": {
-              "Ref": "GraphqlLambdaVersionUzQkS9W38XnbBhM5rDBfs9NpZEJxs6RnIX9TBpcLA"
+              "Ref": "GraphqlLambdaVersionO2qbGrL3F4oZgLF80Ofj6myFnSYBGdkLwO4tP8POu8"
             },
             "Export": {
               "Name": "sls-graphql-mongodb-api-dev-GraphqlLambdaFunctionQualifiedArn"
@@ -511,7 +511,7 @@
         "timeout": 6,
         "runtime": "nodejs16.x",
         "vpc": {},
-        "versionLogicalId": "GraphqlLambdaVersionUzQkS9W38XnbBhM5rDBfs9NpZEJxs6RnIX9TBpcLA"
+        "versionLogicalId": "GraphqlLambdaVersionO2qbGrL3F4oZgLF80Ofj6myFnSYBGdkLwO4tP8POu8"
       }
     },
     "configValidationMode": "warn",
@@ -530,7 +530,7 @@
         ],
         "artifactsS3KeyDirname": "serverless/graphql-mongodb-api/dev/code-artifacts",
         "artifact": "C:\\Users\\Brahm\\Dev-Stuff\\Apps\\securities-chart\\graphql-mongodb-serverless-function\\.serverless\\graphql-mongodb-api.zip",
-        "artifactDirectoryName": "serverless/graphql-mongodb-api/dev/1710821992685-2024-03-19T04:19:52.685Z"
+        "artifactDirectoryName": "serverless/graphql-mongodb-api/dev/1710895275338-2024-03-20T00:41:15.338Z"
       },
       "functions": {
         "$ref": "$[\"service\"][\"functions\"]"
@@ -541,7 +541,7 @@
     "artifact": "C:\\Users\\Brahm\\Dev-Stuff\\Apps\\securities-chart\\graphql-mongodb-serverless-function\\.serverless\\graphql-mongodb-api.zip"
   },
   "package": {
-    "artifactDirectoryName": "serverless/graphql-mongodb-api/dev/1710821992685-2024-03-19T04:19:52.685Z",
+    "artifactDirectoryName": "serverless/graphql-mongodb-api/dev/1710895275338-2024-03-20T00:41:15.338Z",
     "artifact": "graphql-mongodb-api.zip"
   }
 }

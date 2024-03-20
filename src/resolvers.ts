@@ -25,19 +25,19 @@ const resolvers = {
 	},
 	Mutation: {
 		createEntry: async (_: {}, args: ICreateEntryArgs, __: any) => {
-			const entry = args.entry as EntryInput;
-
-			// const { financial, fitness, dietary, social, professional } = args;
-			if (!entry.securitiesRating || !entry.text) {
-				console.error('No securitiesRating or text provided');
-				throw new Error('No securitiesRating or text provided');
-			}
-
-			const text = entry.text;
-			const securitiesRating = entry.securitiesRating;
-
 			try {
 				await connectToDb();
+				const entry = args.entry as EntryInput;
+
+				// const { financial, fitness, dietary, social, professional } = args;
+				if (!entry.securitiesRating || !entry.text) {
+					console.error('No securitiesRating or text provided');
+					throw new Error('No securitiesRating or text provided');
+				}
+
+				const text = entry.text;
+				const securitiesRating = entry.securitiesRating;
+
 				const newEntry = await EntryModel.create({ securitiesRating, text, date: new Date() });
 
 				if (newEntry) {
