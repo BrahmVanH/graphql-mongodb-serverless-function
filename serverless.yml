@@ -1,4 +1,4 @@
-service: graphql-mongodb-api
+service: daily-journal-app-api
 
 provider:
   name: aws

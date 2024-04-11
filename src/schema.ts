@@ -32,6 +32,7 @@ const typeDefs = `#graphql
 	}
 	type Query {
 		allEntries: [Entry]
+		getEntry(id: ID!): Entry
 	}
 
 	type Mutation {

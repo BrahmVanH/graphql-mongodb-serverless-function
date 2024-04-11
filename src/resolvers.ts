@@ -2,6 +2,7 @@ import { connectToDb } from './mongo/db';
 import { Entry, EntryInput, Resolvers } from './generated/graphql';
 import { EntryModel } from './mongo/model';
 import { ICreateEntryArgs } from './types';
+import { get } from 'mongoose';
 
 const resolvers = {
 	Query: {
@@ -20,6 +21,21 @@ const resolvers = {
 				throw new Error('There was an error in retrieving entries from db');
 			}
 		},
+		getEntry: async (_: {}, args: { id: string }, __: any) => {
+			try {
+				await connectToDb();
+
+				const entry = await EntryModel.findById(args.id).exec();
+
+				if (!entry) {
+					throw new Error('No entry found in db');
+				}
+				return entry;
+			} catch (err) {
+				console.error('>getEntry error', err);
+				throw new Error('There was an error in retrieving entry from db');
+			}
+		}
 	},
 	Mutation: {
 		createEntry: async (_: {}, args: ICreateEntryArgs, __: any) => {

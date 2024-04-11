@@ -74,7 +74,7 @@
     "GraphqlLogGroup": {
       "Type": "AWS::Logs::LogGroup",
       "Properties": {
-        "LogGroupName": "/aws/lambda/graphql-mongodb-api-dev-graphql"
+        "LogGroupName": "/aws/lambda/daily-journal-app-api-dev-graphql"
       }
     },
     "IamRoleLambdaExecution": {
@@ -102,7 +102,7 @@
               "Fn::Join": [
                 "-",
                 [
-                  "graphql-mongodb-api",
+                  "daily-journal-app-api",
                   "dev",
                   "lambda"
                 ]
@@ -120,7 +120,7 @@
                   ],
                   "Resource": [
                     {
-                      "Fn::Sub": "arn:${AWS::Partition}:logs:${AWS::Region}:${AWS::AccountId}:log-group:/aws/lambda/graphql-mongodb-api-dev*:*"
+                      "Fn::Sub": "arn:${AWS::Partition}:logs:${AWS::Region}:${AWS::AccountId}:log-group:/aws/lambda/daily-journal-app-api-dev*:*"
                     }
                   ]
                 },
@@ -131,7 +131,7 @@
                   ],
                   "Resource": [
                     {
-                      "Fn::Sub": "arn:${AWS::Partition}:logs:${AWS::Region}:${AWS::AccountId}:log-group:/aws/lambda/graphql-mongodb-api-dev*:*:*"
+                      "Fn::Sub": "arn:${AWS::Partition}:logs:${AWS::Region}:${AWS::AccountId}:log-group:/aws/lambda/daily-journal-app-api-dev*:*:*"
                     }
                   ]
                 }
@@ -144,7 +144,7 @@
           "Fn::Join": [
             "-",
             [
-              "graphql-mongodb-api",
+              "daily-journal-app-api",
               "dev",
               {
                 "Ref": "AWS::Region"
@@ -162,11 +162,11 @@
           "S3Bucket": {
             "Ref": "ServerlessDeploymentBucket"
           },
-          "S3Key": "serverless/graphql-mongodb-api/dev/1710959029080-2024-03-20T18:23:49.080Z/graphql-mongodb-api.zip"
+          "S3Key": "serverless/daily-journal-app-api/dev/1710960569130-2024-03-20T18:49:29.130Z/daily-journal-app-api.zip"
         },
         "Handler": "lambda/dist/server.handler",
         "Runtime": "nodejs16.x",
-        "FunctionName": "graphql-mongodb-api-dev-graphql",
+        "FunctionName": "daily-journal-app-api-dev-graphql",
         "MemorySize": 1024,
         "Timeout": 6,
         "Role": {
@@ -180,20 +180,20 @@
         "GraphqlLogGroup"
       ]
     },
-    "GraphqlLambdaVersiontfDoop4I5lLHTkvM19JD1EhDlDRcy9trbqtLL6X9ws": {
+    "GraphqlLambdaVersion3Fd9XyBWVExRY9q6bSZk45vz8RhjcylGv1DwlTcE": {
       "Type": "AWS::Lambda::Version",
       "DeletionPolicy": "Retain",
       "Properties": {
         "FunctionName": {
           "Ref": "GraphqlLambdaFunction"
         },
-        "CodeSha256": "a9axHm9YHSXV/Z+DEXT8fIFZiuzwpJ5Lfpif9U3+WzQ="
+        "CodeSha256": "B9VE+x1nBvJXUjFkcUhZ8pW0az+aXoXtsPQPe6NS+NY="
       }
     },
     "HttpApi": {
       "Type": "AWS::ApiGatewayV2::Api",
       "Properties": {
-        "Name": "dev-graphql-mongodb-api",
+        "Name": "dev-daily-journal-app-api",
         "ProtocolType": "HTTP",
         "CorsConfiguration": {
           "AllowHeaders": [
@@ -332,16 +332,16 @@
         "Ref": "ServerlessDeploymentBucket"
       },
       "Export": {
-        "Name": "sls-graphql-mongodb-api-dev-ServerlessDeploymentBucketName"
+        "Name": "sls-daily-journal-app-api-dev-ServerlessDeploymentBucketName"
       }
     },
     "GraphqlLambdaFunctionQualifiedArn": {
       "Description": "Current Lambda function version",
       "Value": {
-        "Ref": "GraphqlLambdaVersiontfDoop4I5lLHTkvM19JD1EhDlDRcy9trbqtLL6X9ws"
+        "Ref": "GraphqlLambdaVersion3Fd9XyBWVExRY9q6bSZk45vz8RhjcylGv1DwlTcE"
       },
       "Export": {
-        "Name": "sls-graphql-mongodb-api-dev-GraphqlLambdaFunctionQualifiedArn"
+        "Name": "sls-daily-journal-app-api-dev-GraphqlLambdaFunctionQualifiedArn"
       }
     },
     "HttpApiId": {
@@ -350,7 +350,7 @@
         "Ref": "HttpApi"
       },
       "Export": {
-        "Name": "sls-graphql-mongodb-api-dev-HttpApiId"
+        "Name": "sls-daily-journal-app-api-dev-HttpApiId"
       }
     },
     "HttpApiUrl": {
@@ -375,7 +375,7 @@
         ]
       },
       "Export": {
-        "Name": "sls-graphql-mongodb-api-dev-HttpApiUrl"
+        "Name": "sls-daily-journal-app-api-dev-HttpApiUrl"
       }
     }
   }
