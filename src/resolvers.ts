@@ -1,10 +1,10 @@
 import { connectToDb } from './mongo/db';
-import { Entry, EntryInput, Resolvers } from './generated/graphql';
+import { Entry, EntryInput, MutationCreateEntryArgs, QueryGetEntryArgs, Resolvers } from './generated/graphql';
 import { EntryModel } from './mongo/model';
 import { ICreateEntryArgs } from './types';
 import { get } from 'mongoose';
 
-const resolvers = {
+const resolvers: Resolvers = {
 	Query: {
 		allEntries: async () => {
 			try {
@@ -21,11 +21,11 @@ const resolvers = {
 				throw new Error('There was an error in retrieving entries from db');
 			}
 		},
-		getEntry: async (_: {}, args: { id: string }, __: any) => {
+		getEntry: async (_: {}, args: QueryGetEntryArgs, __: any) => {
 			try {
 				await connectToDb();
 
-				const entry = await EntryModel.findById(args.id).exec();
+				const entry = await EntryModel.findById(args._id).exec();
 
 				if (!entry) {
 					throw new Error('No entry found in db');
@@ -38,7 +38,7 @@ const resolvers = {
 		}
 	},
 	Mutation: {
-		createEntry: async (_: {}, args: ICreateEntryArgs, __: any) => {
+		createEntry: async (_: {}, args: MutationCreateEntryArgs, __: any) => {
 			try {
 				await connectToDb();
 				const entry = args.entry as EntryInput;

@@ -11,7 +11,7 @@ const typeDefs = `#graphql
 	}
 
 	type Entry {
-		id: ID
+		_id: ID
 		date: Date
 		text: String
 		securitiesRating: SecuritiesRating
@@ -32,7 +32,7 @@ const typeDefs = `#graphql
 	}
 	type Query {
 		allEntries: [Entry]
-		getEntry(id: ID!): Entry
+		getEntry(_id: ID!): Entry
 	}
 
 	type Mutation {

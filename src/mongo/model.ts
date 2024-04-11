@@ -1,8 +1,8 @@
 import { model, Schema } from 'mongoose';
-import { IEntry, ISecuritiesRating } from '../types';
+import { Entry, SecuritiesRating } from '../generated/graphql';
 
 
-const securitiesRatingSchema: Schema = new Schema<ISecuritiesRating>({
+const securitiesRatingSchema: Schema = new Schema<SecuritiesRating>({
 	financial: {
 		type: Number,
 		required: true,
@@ -29,7 +29,7 @@ const securitiesRatingSchema: Schema = new Schema<ISecuritiesRating>({
 	},
 });
 
-const entrySchema: Schema = new Schema<IEntry>({
+const entrySchema: Schema = new Schema<Entry>({
 	text: {
 		type: String,
 	},
@@ -43,4 +43,4 @@ const entrySchema: Schema = new Schema<IEntry>({
 	},
 });
 
-export const EntryModel = model<IEntry>('Entry', entrySchema);
+export const EntryModel = model<Entry>('Entry', entrySchema);

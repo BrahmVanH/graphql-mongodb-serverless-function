@@ -6,6 +6,7 @@ export type MakeOptional<T, K extends keyof T> = Omit<T, K> & { [SubKey in K]?: 
 export type MakeMaybe<T, K extends keyof T> = Omit<T, K> & { [SubKey in K]: Maybe<T[SubKey]> };
 export type MakeEmpty<T extends { [key: string]: unknown }, K extends keyof T> = { [_ in K]?: never };
 export type Incremental<T> = T | { [P in keyof T]?: P extends ' $fragmentName' | '__typename' ? T[P] : never };
+export type RequireFields<T, K extends keyof T> = Omit<T, K> & { [P in K]-?: NonNullable<T[P]> };
 /** All built-in and custom scalars, mapped to their actual values */
 export type Scalars = {
   ID: { input: string; output: string; }
@@ -18,8 +19,8 @@ export type Scalars = {
 
 export type Entry = {
   __typename?: 'Entry';
+  _id?: Maybe<Scalars['ID']['output']>;
   date?: Maybe<Scalars['Date']['output']>;
-  id?: Maybe<Scalars['ID']['output']>;
   securitiesRating?: Maybe<SecuritiesRating>;
   text?: Maybe<Scalars['String']['output']>;
 };
@@ -42,6 +43,12 @@ export type MutationCreateEntryArgs = {
 export type Query = {
   __typename?: 'Query';
   allEntries?: Maybe<Array<Maybe<Entry>>>;
+  getEntry?: Maybe<Entry>;
+};
+
+
+export type QueryGetEntryArgs = {
+  _id: Scalars['ID']['input'];
 };
 
 export type SecuritiesRating = {
@@ -167,8 +174,8 @@ export interface DateScalarConfig extends GraphQLScalarTypeConfig<ResolversTypes
 }
 
 export type EntryResolvers<ContextType = any, ParentType extends ResolversParentTypes['Entry'] = ResolversParentTypes['Entry']> = {
+  _id?: Resolver<Maybe<ResolversTypes['ID']>, ParentType, ContextType>;
   date?: Resolver<Maybe<ResolversTypes['Date']>, ParentType, ContextType>;
-  id?: Resolver<Maybe<ResolversTypes['ID']>, ParentType, ContextType>;
   securitiesRating?: Resolver<Maybe<ResolversTypes['SecuritiesRating']>, ParentType, ContextType>;
   text?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
@@ -180,6 +187,7 @@ export type MutationResolvers<ContextType = any, ParentType extends ResolversPar
 
 export type QueryResolvers<ContextType = any, ParentType extends ResolversParentTypes['Query'] = ResolversParentTypes['Query']> = {
   allEntries?: Resolver<Maybe<Array<Maybe<ResolversTypes['Entry']>>>, ParentType, ContextType>;
+  getEntry?: Resolver<Maybe<ResolversTypes['Entry']>, ParentType, ContextType, RequireFields<QueryGetEntryArgs, '_id'>>;
 };
 
 export type SecuritiesRatingResolvers<ContextType = any, ParentType extends ResolversParentTypes['SecuritiesRating'] = ResolversParentTypes['SecuritiesRating']> = {

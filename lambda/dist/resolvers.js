@@ -27,6 +27,20 @@ const resolvers = {
                 throw new Error('There was an error in retrieving entries from db');
             }
         }),
+        getEntry: (_, args, __) => __awaiter(void 0, void 0, void 0, function* () {
+            try {
+                yield (0, db_1.connectToDb)();
+                const entry = yield model_1.EntryModel.findById(args._id).exec();
+                if (!entry) {
+                    throw new Error('No entry found in db');
+                }
+                return entry;
+            }
+            catch (err) {
+                console.error('>getEntry error', err);
+                throw new Error('There was an error in retrieving entry from db');
+            }
+        })
     },
     Mutation: {
         createEntry: (_, args, __) => __awaiter(void 0, void 0, void 0, function* () {
